@@ -8,22 +8,22 @@ import { FaGithub } from 'react-icons/fa';
 
 import Input from '@/components/Input';
 
-// export async function getServerSideProps(context: NextPageContext) {
-//   const session = await getSession(context);
+export async function getServerSideProps(context: NextPageContext) {
+  const session = await getSession(context);
 
-//   if (session) {
-//     return {
-//       redirect: {
-//         destination: '/',
-//         permanent: false,
-//       }
-//     }
-//   }
+  if (session) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      }
+    }
+  }
 
-//   return {
-//     props: {}
-//   }
-// }
+  return {
+    props: {}
+  }
+}
 
 const Auth = () => {
   const router = useRouter();
@@ -47,7 +47,7 @@ const Auth = () => {
         callbackUrl: '/'
       });
 
-      router.push('/');
+      router.push('/profiles');
     } catch (error) {
       console.log(error);
     }
@@ -107,10 +107,10 @@ const Auth = () => {
               {variant === 'login' ? 'Login' : 'Sign up'}
             </button>
             <div className="flex flex-row items-center gap-4 mt-8 justify-center">
-              <div onClick={() => signIn('google', { callbackUrl: '/' })} className="w-10 h-10 bg-white rounded-full flex items-center justify-center cursor-pointer hover:opacity-80 transition">
+              <div onClick={() => signIn('google', { callbackUrl: '/profiles' })} className="w-10 h-10 bg-white rounded-full flex items-center justify-center cursor-pointer hover:opacity-80 transition">
                 <FcGoogle size={32} />
               </div>
-              <div onClick={() => signIn('github', { callbackUrl: '/' })} className="w-10 h-10 bg-white rounded-full flex items-center justify-center cursor-pointer hover:opacity-80 transition">
+              <div onClick={() => signIn('github', { callbackUrl: '/profiles' })} className="w-10 h-10 bg-white rounded-full flex items-center justify-center cursor-pointer hover:opacity-80 transition">
                 <FaGithub size={32} />
               </div>
             </div>
@@ -119,7 +119,7 @@ const Auth = () => {
               <span onClick={toggleVariant} className="text-white ml-1 hover:underline cursor-pointer">
                 {variant === 'login' ? 'Create an account' : 'Login'}
               </span>
-              . ̰
+              .
             </p>
           </div>
         </div>
